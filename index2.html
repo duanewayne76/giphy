@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Giphy Images</title>
+</head>
+
+<body>
+    <!--Beginning Buttons-->
+    <button data-search="Cats">Cats</button>
+    <button data-search="Dogs">Dogs</button>
+    <button data-search="Fish">Fish</button>
+
+    <!--jQuery Link-->
+    <div id="gifDisplay"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+
+
+        //Giphy API
+        $('button').on('click', function () {
+            var x = $(this).data("search");
+            console.log(x)
+
+            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + x + "&api_key=x221pYhxCvwkHdmZNNHqYe7nlKhl2C6r&limit=9";
+            console.log(queryURL);
+
+            $.ajax({ url: queryURL, method: 'GET' })
+                .done(function (response) {
+                    console.log(response);
+                    //Loop to display images
+                    for (let i = 0; i < response.data.length; i++) {
+                        var animalImage = $('<img>');
+                        animalImage.attr('src', response.data[i].images.downsized.url);
+                        $('#gifDisplay').append(animalImage);
+                        $(animalImage).innerHeight(200).innerWidth(200);
+
+                    }
+                    //Psuedo Code:
+                    //on click function to display animated gif
+                    //$(animalImage).on('click', function() {
+
+                    //})
+                    //on click function to display still gif
+                    //animalImage.attr('src', response.data[i].images.original_still.url);
+                })
+
+        })
+
+    </script>
+
+</body>
+
+</html>
