@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Giphy API</title>
+</head>
+
+<body>
+  <h1 id="title"></h1>
+  <div id="gif"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    // Example queryURL for Giphy API
+    function random(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    var queryURL = "https://api.giphy.com/v1/gifs/trending?api_key=x221pYhxCvwkHdmZNNHqYe7nlKhl2C6r";
+
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function (response) {
+      console.log(response);
+     // var iGIF = random(0, response.data.length - 1);
+    //  $("#title").text(response.data[iGIF].title);
+     // $("#gif").html(`<img src="${response.data[iGIF].images["downsized"].url}+">`);
+    });
+  </script>
+
+</body>
+
+</html>
