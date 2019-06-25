@@ -5,54 +5,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Giphy Images</title>
 </head>
 
 <body>
-    <!--Beginning Buttons-->
-    <button data-search="Cats">Cats</button>
+    <div class="container">
+        <!--Beginning Buttons-->
+        <!-- <button data-search="Cats">Cats</button>
     <button data-search="Dogs">Dogs</button>
-    <button data-search="Fish">Fish</button>
+    <button data-search="Fish">Fish</button> -->
+        <div id="addButton"></div>
+        <br>
+        <br>
+        <!--Search-->
+        <form id="search-form">
+            <h2> Find an animal</h2>
+            <input type="text" id="search-input">
+
+            <!-- This button will trigger our AJAX call -->
+            <input id="add-animal" type="submit" value="Search">
+        </form>
+        <br>
+        <br>
+
+        <!--Divs to display data-->
+
+        <div id="gifDisplay" class="row"></div>
+    </div>
+
+
 
     <!--jQuery Link-->
-    <div id="gifDisplay"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript">
-
-
-
-        //Giphy API
-        $('button').on('click', function () {
-            var x = $(this).data("search");
-            console.log(x)
-
-            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + x + "&api_key=x221pYhxCvwkHdmZNNHqYe7nlKhl2C6r&limit=9";
-            console.log(queryURL);
-
-            $.ajax({ url: queryURL, method: 'GET' })
-                .done(function (response) {
-                    console.log(response);
-                    //Loop to display images
-                    for (let i = 0; i < response.data.length; i++) {
-                        var animalImage = $('<img>');
-                        animalImage.attr('src', response.data[i].images.downsized.url);
-                        $('#gifDisplay').append(animalImage);
-                        $(animalImage).innerHeight(200).innerWidth(200);
-
-                    }
-                    //Psuedo Code:
-                    //on click function to display animated gif
-                    //$(animalImage).on('click', function() {
-
-                    //})
-                    //on click function to display still gif
-                    //animalImage.attr('src', response.data[i].images.original_still.url);
-                })
-
-        })
-
-    </script>
-
+    <script src="giphy.js"></script>
 </body>
 
 </html>
