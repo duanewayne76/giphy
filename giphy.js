@@ -37,8 +37,11 @@ $(document).ready(function () {
         $("#addButton").empty();
         // This line will grab the text from the input box
         var animalInput = $("#search-input").val().trim();
-        // The animal from the textbox is then added to our array
-        animals.push(animalInput);
+        if (animalInput) {
+            // The animal from the textbox is then added to our array
+            animals.push(animalInput);
+        };
+
         //Clear the search box
         $("#search-input").val("");
         // calling renderButtons which handles the processing of our animals array
@@ -47,7 +50,7 @@ $(document).ready(function () {
 
     // Calling the renderButtons function at least once to display the initial list of animals
     renderButtons();
-    
+
 
 
 
@@ -56,8 +59,8 @@ $(document).ready(function () {
         var x = $(this).data("search");
         console.log(x);
         $("#gifDisplay").empty();
-        
-        
+
+
 
 
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + x + "&api_key=x221pYhxCvwkHdmZNNHqYe7nlKhl2C6r&limit=8";
@@ -80,7 +83,7 @@ $(document).ready(function () {
                     //Add image state atrributes
                     animalImage.attr('src', response.data[i].images.original_still.url);
                     animalImage.attr('animate', response.data[i].images.downsized.url);
-                    animalImage.attr('temp', response.data[i].images.original_still.url);
+                    animalImage.attr('still', response.data[i].images.original_still.url);
                     animalImage.attr('state', "still");
                     animalImage.addClass('gif');
 
@@ -96,7 +99,7 @@ $(document).ready(function () {
     })
     //Toggle between still and animate
     $(document).on('click', '.gif', function () {
-        if (state === "still") {
+        if ($(this).attr("state") === "still") {
             $(this).attr("src", $(this).attr("animate"));
             $(this).attr("state", "animate");
         } else {
